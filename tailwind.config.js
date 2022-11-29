@@ -14,6 +14,9 @@ module.exports = {
       ...colors,
     },
     extend: {
+      lineHeight:{
+        '12': '3rem'
+      },
       minHeight: {
         "screen-75": "75vh",
       },
