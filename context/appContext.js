@@ -1,9 +1,13 @@
 import {createContext, useContext, useMemo, useState, useReducer} from "react";
+import { getAuth, signOut } from 'firebase/auth';
 import {appReducer, initialState} from "./appReducer.js";
+import { useAuthState } from "react-firebase-hooks/auth";
+import firebase from "../firebase/clientApp";
 
 const AppContext = createContext();
 
 const AppWrapper = ({children}) => {
+    const [user, loading, error] = useAuthState(firebase.auth());
     // const [appState, setAppState] = useState({});
     const {state, dispatch} = useReducer(appReducer, initialState);
 
@@ -12,7 +16,7 @@ const AppWrapper = ({children}) => {
     }, [state, dispatch]);
 
     return (
-        <AppContext.Provider value={contextValue}>
+        <AppContext.Provider value={{contextValue, auth: { user, loading, error }}}>
             {children}
         </AppContext.Provider>
     );

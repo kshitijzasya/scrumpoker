@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React from "react";
+import React, {useEffect} from "react";
 import Link from "next/link";
+import {useRouter} from "next/router";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
+import { useAppContext } from "../../context/appContext"
+
 
 const lowColors = [
   'bg-red-600', 'bg-lightBlue-500', 'bg-blueGray-700'
@@ -19,6 +22,14 @@ const NumberSpan = () => {
 }
 
 export default function Meeting() {
+  const context = useAppContext();
+  const router = useRouter();
+  const {auth} = context;
+  useEffect(_ => {
+    if (!auth.user) {
+        return router.push('/auth/login')
+    }
+  }, [])
   return (
     <>
     <IndexNavbar fixed />

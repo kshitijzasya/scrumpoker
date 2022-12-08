@@ -5,7 +5,7 @@ import Head from "next/head";
 import Router from "next/router";
 
 import PageChange from "components/PageChange/PageChange.js";
-import { AppWrapper } from "../context/appContext.js"
+import { AppWrapper } from "../context/appContext.js";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "styles/tailwind.css";

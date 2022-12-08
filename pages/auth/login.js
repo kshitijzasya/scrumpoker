@@ -33,13 +33,22 @@ const uiConfig = {
   ],
 };
 
-export default function Login() {
+export default function Login(props) {
    // Destructure user, loading, and error out of the hook.  
    const [user, loading, error] = useAuthState(firebase.auth());
-
+    //When user is logged in 
    if (user) {
     Router.push("/user/meeting")
    }
+   //When user record is loading
+   if (loading) {
+      <>
+        <div className="flex align-center justify-center fill-height">
+            <p>Laoding....</p>
+        </div>
+      </>
+   }
+   
 
   return (
     <>
