@@ -14,10 +14,24 @@ const highColors = [
   'bg-yellow-500', 'bg-red-700', 'bg-emerald-500'
 ]
 
+
+// function* number_generator() {
+//   // [1,2,3,5,8,10,12].map(function(v) {
+//   //   yield v
+//   // })
+//   yield 1;
+//   yield 2;
+//   yield 3;
+// }
+
+const points = [1,2,3,5,8,10,12];
+
+const selectValue = point => console.log('point', point);
+
 const NumberSpan = () => { 
   let colors = [...lowColors , ...highColors];
-    return colors.map((color, index) => <div className="my-4 w-6/12 px-4"><div key={index} className={`shadow-lg rounded-lg text-center p-16 ${color} mt-8`} >
-    <span className="bg-white rounded-full w-16 h-16 leading-[50px] inline-block text-center text-xl m-1.5" style={{lineHeight: '60px'}}><b>{index+1}</b></span>
+    return colors.map((color, index) => <div className=""><div key={index} className={`shadow-lg rounded-lg text-center p-16 ${color} mt-8`} onClick={e => selectValue(points[index])}>
+    <span className="bg-white rounded-full w-16 h-16 leading-[50px] inline-block text-center text-xl m-1.5" style={{lineHeight: '60px'}}><b>{points[index]}</b></span>
   </div></div>) 
 }
 
@@ -46,7 +60,7 @@ export default function Meeting() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-wrap justify-between ">
             {/* <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-20">
               <div className="justify-center flex flex-wrap relative"> */}
                 {/* <div className="my-4 w-full lg:w-6/12 px-4"> */}
