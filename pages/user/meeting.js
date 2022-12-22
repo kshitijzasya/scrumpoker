@@ -1,10 +1,13 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import { useAppContext } from "../../context/appContext"
 
+const selectedStyle = {
+  boxShadow: '10px 10px 30px rgb(0 0 0 / 80%)'
+};
 
 const lowColors = [
   'bg-red-600', 'bg-lightBlue-500', 'bg-blueGray-700'
@@ -26,11 +29,9 @@ const highColors = [
 
 const points = [1,2,3,5,8,10,12];
 
-const selectValue = point => console.log('point', point);
-
-const NumberSpan = () => { 
+const NumberSpan = ({selected, setFunction}) => { 
   let colors = [...lowColors , ...highColors];
-    return colors.map((color, index) => <div className=""><div key={index} className={`shadow-lg rounded-lg text-center p-16 ${color} mt-8`} onClick={e => selectValue(points[index])}>
+    return colors.map((color, index) => <div className="" key={index} ><div className={`shadow-lg rounded-lg text-center p-16 ${color} mt-8`} style={index === selected ? selectedStyle: {}} onClick={e => setFunction(index)}>
     <span className="bg-white rounded-full w-16 h-16 leading-[50px] inline-block text-center text-xl m-1.5" style={{lineHeight: '60px'}}><b>{points[index]}</b></span>
   </div></div>) 
 }
@@ -39,6 +40,7 @@ export default function Meeting() {
   const context = useAppContext();
   const router = useRouter();
   const {auth} = context;
+  const [selected, setSelected] = useState(null);
   useEffect(_ => {
     if (!auth.user) {
         return router.push('/auth/login')
@@ -64,7 +66,7 @@ export default function Meeting() {
             {/* <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-20">
               <div className="justify-center flex flex-wrap relative"> */}
                 {/* <div className="my-4 w-full lg:w-6/12 px-4"> */}
-                  <NumberSpan />
+                  <NumberSpan  selected={selected} setFunction={setSelected}/>
                 {/* </div> */}
                 {/* <div className="my-4 w-full lg:w-6/12 px-4">
                 <NumberSpan skip={true}/>
